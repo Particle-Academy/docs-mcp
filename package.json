@@ -1,13 +1,13 @@
 {
   "name": "@particle-academy/docs-mcp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Dev-only MCP server (stdio) that exposes docs from every installed @particle-academy/* package. Configure once in your editor (Claude Code / Cursor / Claude Desktop) and any agent can list, read, and search the docs shipped with your installed fancy-* packages. Not a runtime library — don't import it into application code.",
   "type": "module",
   "bin": {
-    "docs-mcp": "./dist/cli.js",
-    "particle-docs-mcp": "./dist/cli.js"
+    "docs-mcp": "dist/cli.js",
+    "particle-docs-mcp": "dist/cli.js"
   },
-  "main": "./dist/cli.js",
+  "main": "dist/cli.js",
   "files": [
     "dist",
     "README.md"
