@@ -1,0 +1,48 @@
+{
+  "name": "@particle-academy/docs-mcp",
+  "version": "0.1.0",
+  "description": "Local MCP server exposing docs from every installed @particle-academy/* package. Configure once in your editor (Claude Code / Cursor / Claude Desktop) and any agent can list, read, and search the docs that ship with your installed fancy-* packages.",
+  "type": "module",
+  "bin": {
+    "docs-mcp": "./dist/cli.js",
+    "particle-docs-mcp": "./dist/cli.js"
+  },
+  "main": "./dist/cli.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p .",
+    "dev": "tsc -w -p .",
+    "prepublishOnly": "tsc -p ."
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "docs",
+    "particle-academy",
+    "fancy",
+    "ai",
+    "agents",
+    "claude",
+    "cursor"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Particle-Academy/docs-mcp.git"
+  },
+  "homepage": "https://github.com/Particle-Academy/docs-mcp#readme",
+  "bugs": "https://github.com/Particle-Academy/docs-mcp/issues",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "@types/node": "^20.0.0"
+  }
+}
