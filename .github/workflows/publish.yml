@@ -26,11 +26,5 @@ jobs:
       - name: Build
         run: npm run build
 
-      # First publish needs NPM_TOKEN bootstrap (see CLAUDE.md
-      # "Bootstrapping a brand-new package"). Once Trusted Publisher is
-      # configured on npmjs.com, remove the env line below and the
-      # workflow publishes via OIDC alone.
       - name: Publish
         run: npx -y npm@latest publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
