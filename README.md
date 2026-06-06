@@ -1,5 +1,7 @@
 # @particle-academy/docs-mcp
 
+[![Fancy UI suite](art/fancy-ui.svg)](https://particle.academy)
+
 > **Dev tool — not for production.** A local Model Context Protocol
 > server that hands your coding agent the docs shipped inside every
 > installed `@particle-academy/*` package. Runs on your machine, talks
