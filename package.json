@@ -15,10 +15,12 @@
   "scripts": {
     "build": "tsc -p .",
     "dev": "tsc -w -p .",
-    "prepublishOnly": "tsc -p ."
+    "prepublishOnly": "tsc -p .",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "keywords": [
     "mcp",
@@ -42,7 +44,9 @@
     "access": "public"
   },
   "devDependencies": {
+    "@types/node": "^20.0.0",
+    "jsdom": "^29.1.1",
     "typescript": "^5.7.0",
-    "@types/node": "^20.0.0"
+    "vitest": "^3.2.7"
   }
 }
