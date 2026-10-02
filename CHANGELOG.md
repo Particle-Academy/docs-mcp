@@ -16,6 +16,7 @@ upgrading.
 ## [Unreleased]
 
 ### Fixed
+- **`CHANGELOG.md` is now in the published tarball.** `files` did not whitelist it, so npm never shipped it — and this package puts breaking changes in MINOR releases and tells you in the README to read the entry before taking one. The instruction existed for the author, who has the file, and not for the consumer, who is the only one being instructed. Nothing for you to do; the file simply arrives from this release on.
 
 - **The MCP server advertised 0.1.0 while the package shipped as 0.2.0.** `serverInfo.version` goes out in every `initialize` response, so every connecting agent was told a version three months out of date. The comment beside the literal read "for now keep static and bump in package.json" — a description of the failure rather than a mitigation. It now reads `package.json` at runtime; `version.test.ts` fails if a literal returns.
 
