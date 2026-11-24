@@ -17,6 +17,34 @@ upgrading.
 
 ### Changed
 
+- **Speaks MCP `2025-11-25`, and actually negotiates.** The server answered
+  `2024-11-05` to every `initialize`, whatever the client asked for. It now
+  answers the revision the client requests when it supports it (`2025-11-25`,
+  `2025-06-18`, `2025-03-26`, `2024-11-05`) and `2025-11-25` otherwise, as the
+  lifecycle spec requires. Older clients keep working on their own revision.
+  This is a stdio server, so the HTTP-only rules of those revisions
+  (`MCP-Protocol-Version` header, Origin checks, sessions) do not apply.
+- **BREAKING: `structuredContent` is always a JSON object.** From 2025-06-18 the
+  schema types it as an object, and `docs_list_packages`, `docs_list` and
+  `docs_search` returned bare arrays there, which a client that validates
+  results rejects. They now return `{ packages: [...] }`, `{ files: [...] }` and
+  `{ hits: [...] }`. If your code reads `structuredContent` from those three
+  tools, read the named key instead; the rows are unchanged. The text content is
+  unchanged, so an agent reading the text needs nothing.
+- **An unknown tool is error `-32602`**, the code the spec gives for it. Every
+  protocol error was sent as `-32603` before, whatever its intended code.
+- **A tool that throws returns a result with `isError: true`** instead of a
+  protocol error, so the client passes it to the model (2025-11-25 error
+  handling).
+
+### Added
+
+- **JSON-RPC batches under `2025-03-26` only.** That revision requires
+  receivers to accept batches and the next one removed them. A batch is answered
+  with an array of responses when `2025-03-26` was negotiated, and rejected with
+  `-32600` under any other revision or before `initialize`. Before this, a batch
+  was silently dropped.
+
 - **CI: the lab-certificate gate verifies against the lab's rotated key list.**
   The lab's first signing key is retired: certificates it already issued still
   verify, and nothing new it signs ever can. Consumers do nothing.

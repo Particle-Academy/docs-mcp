@@ -37,13 +37,13 @@ export function registerDocsTools(server: McpServer, options: ScanOptions = {}):
       if (rows.length === 0) {
         return textResult(
           "No packages with docs found. Scan options: " + JSON.stringify(options),
-          rows as unknown as JsonObject[],
+          { packages: rows },
         );
       }
       const lines = rows.map(
         (r) => `${r.name}@${r.version} (${r.source}) — ${r.fileCount} file${r.fileCount === 1 ? "" : "s"}`,
       );
-      return textResult(lines.join("\n"), rows as unknown as JsonObject[]);
+      return textResult(lines.join("\n"), { packages: rows });
     },
   );
 
@@ -81,7 +81,7 @@ export function registerDocsTools(server: McpServer, options: ScanOptions = {}):
         })),
       );
       const lines = rows.map((r) => `${r.package}@${r.version}  ${r.path}  (${r.bytes}B)`);
-      return textResult(lines.join("\n"), rows as unknown as JsonObject[]);
+      return textResult(lines.join("\n"), { files: rows });
     },
   );
 
@@ -139,14 +139,14 @@ export function registerDocsTools(server: McpServer, options: ScanOptions = {}):
         limit: typeof args.limit === "number" ? args.limit : undefined,
         caseSensitive: typeof args.caseSensitive === "boolean" ? args.caseSensitive : undefined,
       });
-      if (hits.length === 0) return textResult(`No hits for "${query}".`, []);
+      if (hits.length === 0) return textResult(`No hits for "${query}".`, { hits: [] });
       const lines = hits.map(
         (h) =>
           `${h.packageName}  ${h.path}:${h.line}` +
           (h.heading ? `  [${h.heading}]` : "") +
           `\n    ${h.preview}`,
       );
-      return textResult(lines.join("\n\n"), hits as unknown as JsonObject[]);
+      return textResult(lines.join("\n\n"), { hits: hits as unknown as JsonObject[] });
     },
   );
 

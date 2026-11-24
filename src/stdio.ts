@@ -1,6 +1,6 @@
 import { stdin, stdout, stderr } from "node:process";
 import { createInterface } from "node:readline";
-import type { JsonRpcMessage, McpServer, Transport } from "./mcp.js";
+import type { JsonRpcMessage, JsonRpcResponse, McpServer, Transport } from "./mcp.js";
 
 /**
  * Newline-delimited JSON-RPC over stdin/stdout — the standard transport
@@ -9,7 +9,7 @@ import type { JsonRpcMessage, McpServer, Transport } from "./mcp.js";
  */
 export function attachStdio(server: McpServer): Transport {
   const transport: Transport = {
-    send(message: JsonRpcMessage) {
+    send(message: JsonRpcMessage | JsonRpcResponse[]) {
       stdout.write(JSON.stringify(message) + "\n");
     },
     close() {
@@ -21,9 +21,9 @@ export function attachStdio(server: McpServer): Transport {
   rl.on("line", (line) => {
     const trimmed = line.trim();
     if (trimmed.length === 0) return;
-    let msg: JsonRpcMessage;
+    let msg: JsonRpcMessage | JsonRpcMessage[];
     try {
-      msg = JSON.parse(trimmed) as JsonRpcMessage;
+      msg = JSON.parse(trimmed) as JsonRpcMessage | JsonRpcMessage[];
     } catch (e) {
       stderr.write(`[docs-mcp] failed to parse line: ${e instanceof Error ? e.message : String(e)}\n`);
       return;

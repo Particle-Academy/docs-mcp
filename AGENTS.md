@@ -45,7 +45,11 @@ versions actually installed in this project's `node_modules`.
 | `docs_search` | Substring search; hits with line numbers and section headings |
 | `docs_refresh` | Re-scan the filesystem |
 
-Every tool returns readable text and a `structuredContent` JSON payload.
+Every tool returns readable text and a `structuredContent` JSON payload. That
+payload is always an object: `{ packages }` from `docs_list_packages`,
+`{ files }` from `docs_list`, `{ hits }` from `docs_search`, and
+`{ package, path, bytes }` / `{ packageCount }` from `docs_read` /
+`docs_refresh`.
 
 ### Typical agent flow
 
