@@ -15,6 +15,8 @@ upgrading.
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-24
+
 ### Changed
 
 - **Speaks MCP `2025-11-25`, and actually negotiates.** The server answered
